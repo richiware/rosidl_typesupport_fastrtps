@@ -61,19 +61,19 @@ namespace typesupport_fastrtps_cpp
 bool
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_PUBLIC_@(package_name)
 cdr_serialize(
-  const @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) & ros_message,
+  const @('::'.join(message.structure.namespaced_type.namespaced_name())) & ros_message,
   eprosima::fastcdr::Cdr & cdr);
 
 bool
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_PUBLIC_@(package_name)
 cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
-  @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) & ros_message);
+  @('::'.join(message.structure.namespaced_type.namespaced_name())) & ros_message);
 
 size_t
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_PUBLIC_@(package_name)
 get_serialized_size(
-  const @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) & ros_message,
+  const @('::'.join(message.structure.namespaced_type.namespaced_name())) & ros_message,
   size_t current_alignment);
 
 size_t

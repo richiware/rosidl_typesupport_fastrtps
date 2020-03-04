@@ -83,7 +83,7 @@ namespace typesupport_fastrtps_cpp
 bool
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_PUBLIC_@(package_name)
 cdr_serialize(
-  const @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) & ros_message,
+  const @('::'.join(message.structure.namespaced_type.namespaced_name())) & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
 @[for member in message.structure.members]@
@@ -168,7 +168,7 @@ bool
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_PUBLIC_@(package_name)
 cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
-  @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) & ros_message)
+  @('::'.join(message.structure.namespaced_type.namespaced_name())) & ros_message)
 {
 @[for member in message.structure.members]@
   // Member: @(member.name)
@@ -269,7 +269,7 @@ cdr_deserialize(
 size_t
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_PUBLIC_@(package_name)
 get_serialized_size(
-  const @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) & ros_message,
+  const @('::'.join(message.structure.namespaced_type.namespaced_name())) & ros_message,
   size_t current_alignment)
 {
   size_t initial_alignment = current_alignment;
@@ -432,7 +432,7 @@ static bool _@(message.structure.namespaced_type.name)__cdr_serialize(
   eprosima::fastcdr::Cdr & cdr)
 {
   auto typed_message =
-    static_cast<const @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) *>(
+    static_cast<const @('::'.join(message.structure.namespaced_type.namespaced_name())) *>(
     untyped_ros_message);
   return cdr_serialize(*typed_message, cdr);
 }
@@ -442,7 +442,7 @@ static bool _@(message.structure.namespaced_type.name)__cdr_deserialize(
   void * untyped_ros_message)
 {
   auto typed_message =
-    static_cast<@('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) *>(
+    static_cast<@('::'.join(message.structure.namespaced_type.namespaced_name())) *>(
     untyped_ros_message);
   return cdr_deserialize(cdr, *typed_message);
 }
@@ -451,7 +451,7 @@ static uint32_t _@(message.structure.namespaced_type.name)__get_serialized_size(
   const void * untyped_ros_message)
 {
   auto typed_message =
-    static_cast<const @('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])) *>(
+    static_cast<const @('::'.join(message.structure.namespaced_type.namespaced_name())) *>(
     untyped_ros_message);
   return static_cast<uint32_t>(get_serialized_size(*typed_message, 0));
 }
@@ -462,7 +462,7 @@ static size_t _@(message.structure.namespaced_type.name)__max_serialized_size(bo
 }
 
 static message_type_support_callbacks_t _@(message.structure.namespaced_type.name)__callbacks = {
-  "@('::'.join([package_name] + list(interface_path.parents[0].parts)))",
+  "@('::'.join(message.structure.namespaced_type.namespaces))",
   "@(message.structure.namespaced_type.name)",
   _@(message.structure.namespaced_type.name)__cdr_serialize,
   _@(message.structure.namespaced_type.name)__cdr_deserialize,
@@ -488,9 +488,9 @@ namespace rosidl_typesupport_fastrtps_cpp
 template<>
 ROSIDL_TYPESUPPORT_FASTRTPS_CPP_EXPORT_@(package_name)
 const rosidl_message_type_support_t *
-get_message_type_support_handle<@('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name]))>()
+get_message_type_support_handle<@('::'.join(message.structure.namespaced_type.namespaced_name()))>()
 {
-  return &@('::'.join([package_name] + list(interface_path.parents[0].parts)))::typesupport_fastrtps_cpp::_@(message.structure.namespaced_type.name)__handle;
+  return &@('::'.join(message.structure.namespaced_type.namespaces))::typesupport_fastrtps_cpp::_@(message.structure.namespaced_type.name)__handle;
 }
 
 }  // namespace rosidl_typesupport_fastrtps_cpp
@@ -502,7 +502,7 @@ extern "C"
 
 const rosidl_message_type_support_t *
 ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_cpp, @(', '.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name])))() {
-  return &@('::'.join([package_name] + list(interface_path.parents[0].parts)))::typesupport_fastrtps_cpp::_@(message.structure.namespaced_type.name)__handle;
+  return &@('::'.join(message.structure.namespaced_type.namespaces))::typesupport_fastrtps_cpp::_@(message.structure.namespaced_type.name)__handle;
 }
 
 #ifdef __cplusplus
